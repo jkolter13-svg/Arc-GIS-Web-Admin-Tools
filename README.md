@@ -355,9 +355,5 @@ Edit the configuration block near the top of the script before running.
 ---
 ## Credits and License
 
-Original scripts by **Joshua Sharp-Heward**, Whangarei, New Zealand (© 2019)
-Released under the GNU Lesser General Public License v3.0 (LGPLv3)
-[jsh726@uowmail.edu.au](mailto:jsh726@uowmail.edu.au) · [LinkedIn](https://www.linkedin.com/in/joshua-sharp-heward-89b129131/)
-
-Modified, updated, and extensively commented by **Jonathan Kolterman** (2026)
+**Jonathan Kolterman** (2026)
 [jkolterman13@gmail.com](mailto:jkolterman13@gmail.com) · [LinkedIn](https://www.linkedin.com/in/jonathan-kolterman-1808342b8)
