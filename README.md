@@ -17,6 +17,7 @@ A collection of read-only Python scripts for inventorying and auditing ArcGIS On
   - [Metadata_Report.py](#metadata_reportpy)
   - [User_Reports.py](#user_reportspy)
   - [CSV_Mergeing_tool.py](#csv_mergeing_toolpy)
+  - [Publish_to_Federated_Server.py](#publish_to_federated_serverpy)
 - [Output Files Reference](#output-files-reference)
 - [Authentication Options](#authentication-options)
 - [Known Issues / Work in Progress](#known-issues--work-in-progress)
