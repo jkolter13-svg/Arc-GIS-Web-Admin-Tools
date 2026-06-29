@@ -282,7 +282,76 @@ For `List_of_all_services_in_the_REST.py`, which uses direct HTTP requests rathe
 - **User_Reports.py** — Storage columns (`storage_usage`, `storage_quota`) can be difficult to interpret; the values are in bytes and the relationship between per-user quota and org-level quota is not always clear. Additionally, printing each user's information to unique, clearly labeled columns is a planned improvement.
 
 ---
+## Publish_to_Federated_Server.py
 
+**What it does:** Publishes an ArcGIS Pro map to a federated ArcGIS Server as both a **Map Image Service** and an **editable Feature Service**, while referencing a registered Enterprise Geodatabase (no data is copied to the server).
+
+Unlike the built-in **Share as Web Layer** wizard, this script automates the entire publishing workflow, including enabling Feature Access, organizing Portal content, deleting temporary staging artifacts, and protecting the published services from accidental deletion.
+
+### Workflow
+
+The script performs the following steps:
+
+1. Connects to the active ArcGIS Enterprise portal using the current ArcGIS Pro login.
+2. Opens an ArcGIS Pro project (`.aprx`) and locates the specified map.
+3. Creates a Service Definition Draft (`.sddraft`) targeting a federated ArcGIS Server.
+4. Modifies the `.sddraft` XML to enable the **FeatureServer** extension with full editing capabilities.
+5. Stages the draft into a Service Definition (`.sd`) file.
+6. Uploads the `.sd` file to Portal.
+7. Publishes the service to the federated ArcGIS Server.
+8. Automatically:
+   - Deletes the temporary Service Definition Portal item.
+   - Moves the Map Service and Feature Service Portal items into the configured folder.
+   - Enables delete protection on both Portal items.
+9. Deletes the temporary local `.sddraft` and `.sd` files.
+
+### Why Use This Script?
+
+Although ArcGIS Pro includes a **Share as Web Layer** wizard, several important administrative tasks must still be completed manually when publishing to a federated ArcGIS Server.
+
+This script automates those tasks by:
+
+- Enabling Feature Access through XML modification.
+- Publishing by reference to registered Enterprise Geodatabase data.
+- Automatically deleting temporary Service Definition items after publishing.
+- Organizing Portal items into the desired folder.
+- Enabling delete protection on published services.
+- Providing a repeatable deployment workflow using a single configuration section.
+
+### Configuration
+
+Edit the configuration block near the top of the script before running.
+
+| Setting | Description |
+|---------|-------------|
+| `APRX_PATH` | Path to the ArcGIS Pro project (.aprx). |
+| `MAP_NAME` | Name of the map to publish. |
+| `SERVICE_NAME` | Name of the published service. |
+| `SERVER_URL` | Federated ArcGIS Server REST URL. |
+| `SERVER_FOLDER` | ArcGIS Server folder for the service. |
+| `PORTAL_FOLDER` | Destination Portal content folder. |
+| `SD_FOLDER` | Local folder for temporary staging files. |
+| `SERVICE_SUMMARY` | Summary shown in Portal. |
+| `SERVICE_TAGS` | Comma-separated Portal tags. |
+
+### Requirements
+
+- ArcGIS Pro 2.9 or later
+- ArcGIS Enterprise / ArcGIS Server 10.9.1 or later
+- ArcGIS API for Python
+- Active Portal sign-in inside ArcGIS Pro
+- Portal Administrator (or equivalent publishing privileges)
+- Registered Enterprise Geodatabase data store on the federated server
+
+### Notes
+
+- References registered Enterprise Geodatabase data (**no data is copied to the server**).
+- Automatically removes temporary `.sd` upload items from Portal after publishing.
+- Moves the published Map Service and Feature Service items into the configured Portal folder.
+- Enables delete protection on both Portal items to help prevent accidental removal of production services.
+- Includes extensive inline comments documenting each stage of the publishing workflow, making it suitable as both a deployment tool and a learning resource for ArcGIS Enterprise automation.
+
+---
 ## Credits and License
 
 Original scripts by **Joshua Sharp-Heward**, Whangarei, New Zealand (© 2019)
